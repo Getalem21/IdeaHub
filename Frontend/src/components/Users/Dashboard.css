@@ -1,0 +1,143 @@
+/* ===== Dashboard Page Layout ===== */
+.dashboard-page {
+  background-color: #f8f9fb;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+.dashboard-content {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.dashboard-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* ===== Post Section ===== */
+.posts-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.post-idea-link {
+  background-color: #2563eb;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.post-idea-link:hover {
+  background-color: #1d4ed8;
+}
+
+.posts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ===== Post Card ===== */
+.post-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.post-card h3 {
+  color: #1e293b;
+  margin-bottom: 0.3rem;
+}
+
+.post-card p {
+  color: #475569;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  max-height: 350px;
+}
+
+/* ===== Comment Section ===== */
+.comment-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.comment-input {
+  flex: 1;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.comment-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.comment-button:hover {
+  background-color: #1e40af;
+}
+
+/* ===== Comment Item ===== */
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.commenter-photo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+}
+
+.comment-item p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.3;
+}
+
+.comment-item strong {
+  color: #1e293b;
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+/* ===== Post Author ===== */
+.post-author {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 0.5rem;
+}

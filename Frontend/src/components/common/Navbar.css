@@ -1,0 +1,190 @@
+/* ===== NAVBAR BASE ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d6efd; /* Blue primary color */
+  color: white;
+  padding: 12px 25px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1000;
+}
+
+/* ===== LEFT SIDE: LOGO + TITLE ===== */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.nav-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* ===== RIGHT SIDE: AUTH LINKS OR USER ===== */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== LOGIN / REGISTER LINKS ===== */
+.auth-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 15px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background 0.2s ease;
+}
+
+.auth-links a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ===== USER SECTION ===== */
+.user-section {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.arrow {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+/* ===== DROPDOWN MENU ===== */
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  width: 240px;
+  background: #fff;
+  color: #333;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: fadeIn 0.25s ease;
+  overflow: hidden;
+}
+
+.dropdown-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dropdown-profile div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dropdown-profile p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.email {
+  color: gray;
+  font-size: 0.85rem;
+}
+
+.phone {
+  color: #0d6efd;
+  font-size: 0.85rem;
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.dropdown-logout {
+  width: 100%;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+  transition: background 0.2s ease;
+}
+
+.dropdown-logout:hover {
+  background: #0b5ed7;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 15px;
+  }
+
+  .nav-title {
+    font-size: 1.1rem;
+  }
+
+  .user-avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .dropdown {
+    top: 50px;
+    width: 200px;
+  }
+}

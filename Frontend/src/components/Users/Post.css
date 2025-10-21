@@ -1,0 +1,113 @@
+/* Container styling */
+.dashboard-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background: #f9fafc;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Post idea card */
+.post-idea-card {
+  width: 100%;
+  max-width: 550px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.post-idea-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.post-idea-card h3 {
+  font-size: 1.6rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* Input fields */
+.title-input,
+.idea-textarea {
+  width: 100%;
+  border: 1px solid #dcdfe3;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #fafbfc;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.title-input:focus,
+.idea-textarea:focus {
+  border-color: #007bff;
+  background-color: #fff;
+}
+
+/* Textarea */
+.idea-textarea {
+  resize: none;
+  min-height: 120px;
+}
+
+/* File input styling */
+input[type="file"] {
+  background-color: #fafbfc;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dcdfe3;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* Button styling */
+.post-btn {
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.post-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Small screen responsiveness */
+@media (max-width: 600px) {
+  .post-idea-card {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .post-idea-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .title-input,
+  .idea-textarea {
+    font-size: 0.95rem;
+  }
+
+  .post-btn {
+    font-size: 0.95rem;
+  }
+}
