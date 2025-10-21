@@ -6,7 +6,7 @@ import { authenticateToken, isAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
 /////////////////////////////////user manage/////////////////////////////////////////////////////////////////////////////////////////
-router.get("/users", authenticateToken, async (req, res) => {
+router.get("/users", authenticateToken, isAdmin , async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -17,7 +17,7 @@ router.get("/users", authenticateToken, async (req, res) => {
 });
 
 
-router.put("/users/:id", authenticateToken, async (req, res) => {
+router.put("/users/:id", authenticateToken,isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;

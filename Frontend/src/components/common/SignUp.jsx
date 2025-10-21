@@ -79,13 +79,17 @@ const SignUp = () => {
             onChange={handleChange}
             required
           />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            value={form.phone}
-            onChange={handleChange}
-          />
+        <input
+            type="tel"
+             name="phone"
+             placeholder="Phone        Number"
+             value={form.phone}
+             onChange={handleChange}
+             pattern="^[0-9+\s\-]{7,15}$"
+             required
+                     />
+
+             
           <input
             type="file"
             name="photo"
