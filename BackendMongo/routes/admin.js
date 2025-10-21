@@ -50,7 +50,6 @@ router.delete("/users/:id", authenticateToken,isAdmin, async (req, res) => {
 /////////////////////////////////////////Admin Post manage///////////////////////////////////////////////////////////////////////////////////
 
 router.get("/posts", authenticateToken,isAdmin, async (req, res) => {
-        console.log("User:", req.user);
 
   try {
     // Get all posts (pending + approved)
@@ -92,7 +91,30 @@ router.delete("/posts/:id", authenticateToken, isAdmin, async (req, res) => {
   }
 });
 
+///////////////////////////////Comment manage//////////////////////////////////////////////////////////////////////////////////////////
+router.get('/comments', authenticateToken, isAdmin, async (req, res) => {
+  try {
+    const comments = await Comments.find()
+      .sort({ createdAt: -1 })
+      .populate("user_id", "username photo")
+      .populate("post_id", "title description");
 
+    res.json(comments);
+  } catch (err) {
+    console.error("Fetch comments error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
+router.delete("/comments/:id", authenticateToken, isAdmin, async (req, res) => {
+  try {
+    const comments = await Comments.findByIdAndDelete(req.params.id);
+    if (!comments) return res.status(404).json({ message: "Post not found" });
+    res.json({ message: "Post deleted successfully" });
+  } catch (err) {
+    console.error("Delete post error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 export default router;

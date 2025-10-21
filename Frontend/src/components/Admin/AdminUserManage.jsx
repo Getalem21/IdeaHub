@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import AdminPostManage from "./AdminPostManage"; 
 import "./AdminUserManage.css";
+import CommentManage from "./CommentManage";
 
 function AdminPage() {
   const { token } = useContext(AuthContext);
@@ -97,6 +98,7 @@ function AdminPage() {
         </tbody>
       </table>
       <AdminPostManage/>
+      <CommentManage/>
     </div>
   );
 }

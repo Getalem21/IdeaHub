@@ -37,6 +37,7 @@ const SignUp = () => {
       formData.append("password", form.password);
       formData.append("phone", form.phone);
       if (form.photo) formData.append("photo", form.photo);
+  
 
       await axios.post("http://localhost:5000/users/signup", formData, {
         headers: { "Content-Type": "multipart/form-data" },
