@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 import { authenticateToken } from "../middleware/auth.js";
 import Post from "../models/Post.js";
+import Comments from "../models/Comments.js";
 
 
 const router = express.Router();
@@ -16,12 +17,16 @@ const upload = multer({ storage });
 /* ----------------------------- Get all posts ----------------------------- */
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find({status: "approved" })
+    const posts = await Post.find({ status: "approved" })
       .sort({ createdAt: -1 })
-      .populate("user_id", "username photo")
-      .populate("comments.user_id", "username photo");
+      .populate("user_id", "username photo");
 
-    res.json(posts);
+    const postsWithComments = await Promise.all(posts.map(async (post) => {
+      const comments = await Comments.find({ post_id: post._id }).populate("user_id", "username photo");
+      return { ...post.toObject(), comments };
+    }));
+
+    res.json(postsWithComments);
   } catch (err) {
     console.error("Fetch posts error:", err);
     res.status(500).json({ message: "Server error" });
@@ -65,18 +70,16 @@ router.post("/:postId/comments", authenticateToken, async (req, res) => {
 
     const post = await Post.findById(req.params.postId);
     if (!post) return res.status(404).json({ message: "Post not found" });
-
-    post.comments.push({
+    const newComment = new Comments({
       user_id: req.user.id,
+      post_id: req.params.postId,
       text
     });
 
-    await post.save();
+    await newComment.save();
 
-    const updatedPost = await Post.findById(req.params.postId).populate("comments.user_id", "username photo");
-    const newComment = updatedPost.comments[updatedPost.comments.length - 1];
-
-    res.json(newComment);
+    const populatedComment = await Comments.findById(newComment._id).populate("user_id", "username photo");
+    res.json(populatedComment);
   } catch (err) {
     console.error("Add comment error:", err);
     res.status(500).json({ message: "Server error" });

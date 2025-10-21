@@ -2,6 +2,7 @@
 import express from "express";
 import User from "../models/User.js";
 import Post from "../models/Post.js";
+import Comments from "../models/Comments.js";
 import { authenticateToken, isAdmin } from "../middleware/auth.js";
 
 const router = express.Router();
