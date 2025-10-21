@@ -63,15 +63,12 @@ function Dashboard() {
 
   return (
     <div className="dashboard-page">
-      <Navbar />
+     
       <div className="dashboard-content">
         <h2 className="dashboard-title">Community Ideas</h2>
         <div className="posts-container">
           <Link to="/post" className="post-idea-link">
             Post Your Idea
-          </Link>
-             <Link to="/AdminUserManage" className="post-idea-link">
-            Manage user
           </Link>
         </div>
 

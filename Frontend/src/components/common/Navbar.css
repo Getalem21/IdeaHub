@@ -3,11 +3,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0d6efd; /* Blue primary color */
+  background: #12a9a9a6;
   color: white;
   padding: 12px 25px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;         /* Correct property */
+  top: 0;                   /* Stick to top of viewport */
   z-index: 1000;
 }
 

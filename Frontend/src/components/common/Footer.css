@@ -1,0 +1,94 @@
+.footer {
+  background-color: #12a9a9a6;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  border-top: 1px solid #ddd;
+}
+
+.footer-logo img {
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.footer-contact p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.footer-contact a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+.footer-social {
+  margin: 20px 0;
+}
+
+.footer-social a {
+  margin: 0 10px;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.footer-social a:hover {
+  transform: scale(1.1);
+}
+
+.footer-social img {
+  height: 24px;
+  width: 24px;
+}
+
+.footer-subscribe form {
+  margin-top: 20px;
+}
+
+.footer-subscribe input[type="email"] {
+  padding: 10px;
+  width: 250px;
+  max-width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.footer-subscribe button {
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.footer-subscribe button:hover {
+  background-color: #005fa3;
+}
+
+.footer-copy {
+  margin-top: 30px;
+  font-size: 13px;
+  color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .footer-subscribe input[type="email"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .footer-subscribe button {
+    width: 100%;
+  }
+
+  .footer-social a {
+    margin: 0 5px;
+  }
+}

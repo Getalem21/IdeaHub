@@ -6,11 +6,17 @@ import Dashboard from "./components/Users/Dashboard";
 import { useContext } from "react"; 
 import Post from "./components/Users/Post";
 import AdminUsersManage from "./components/Admin/AdminUserManage";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
+    
     <AuthProvider>
       <Router>
+    
+           <Navbar />
+      
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
@@ -32,6 +38,7 @@ function App() {
          
         </Routes>
       </Router>
+      <Footer/>
     </AuthProvider>
   );
 }

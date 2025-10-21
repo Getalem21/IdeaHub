@@ -6,6 +6,8 @@
 }
 
 .dashboard-content {
+  display: flex;
+  flex-direction: column;
   max-width: 900px;
   margin: 2rem auto;
   padding: 1rem;
@@ -27,6 +29,7 @@
 
 .post-idea-link {
   background-color: #2563eb;
+  width: auto;
   color: white;
   text-decoration: none;
   padding: 0.6rem 1.2rem;
