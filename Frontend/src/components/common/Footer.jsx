@@ -11,8 +11,8 @@ const Footer = () => {
 
       {/* Contact Info */}
       <div className="footer-contact">
-        <p>Contact us: <a href="mailto:support@example.com">support@example.com</a> | +1 (555) 123-4567</p>
-        <p>123 Business Street, City, Country</p>
+        <p>Contact us: <a href="mailto:support@example.com">support@example.com</a> | +251 (955) 123-4567</p>
+        <p>Megenagna, Addis Ababa, Ethiopia</p>
       </div>
 
       {/* Social Links */}
