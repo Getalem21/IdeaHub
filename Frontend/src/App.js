@@ -8,25 +8,25 @@ import Post from "./components/Users/Post";
 import AdminUsersManage from "./components/Admin/AdminUserManage";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
+import Profile from "./components/Users/Profile";
+import Chat from "./components/Users/Chat";
 
 function App() {
-  return (
+
+  return (  
     
     <AuthProvider>
       <Router>
-    
-           <Navbar />
-      
+      <Navbar />      
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
            <Route path="/" element={<Dashboard />} />
-           <Route path="*" element={<Navigate to="/signin" />} />
+        
            <Route path="/post" element={<Post/>} />
            <Route path ="/AdminUserManage" element={<AdminUsersManage/>}/>
-
-
-
+           <Route path="/profile/:id" element={<Profile />} />
+           <Route path="/chat/:id" element={<Chat />} />
           <Route
             path="/post"
             element={

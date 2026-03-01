@@ -54,25 +54,39 @@
   border-radius: 12px;
   padding: 1.2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 100%;
 }
 
+/* Title */
 .post-card h3 {
   color: #1e293b;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
 }
 
+/* ===== Improved Description Readability ===== */
 .post-card p {
-  color: #475569;
-  margin-bottom: 0.8rem;
-  line-height: 1.4;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  max-width: 100%;
 }
 
+/* Extra spacing between multiple paragraphs */
+.post-card p + p {
+  margin-top: 0.8rem;
+}
+
+/* ===== FIXED POST IMAGE (FULLY VISIBLE) ===== */
 .post-image {
   width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
   border-radius: 10px;
+  display: block;
   margin-bottom: 1rem;
-  object-fit: cover;
-  max-height: 350px;
 }
 
 /* ===== Comment Section ===== */
@@ -142,5 +156,13 @@
 .post-author {
   font-size: 0.9rem;
   color: #64748b;
-  margin-top: 0.5rem;
+  margin-top: 2px;
+}
+
+.auther-photo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
 }

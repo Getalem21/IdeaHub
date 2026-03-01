@@ -45,9 +45,10 @@ function CommentManage() {
       <table border="1" cellPadding="10" cellSpacing="0">
         <thead>
           <tr>
-            <th>auther</th>
-            <th>comment</th>
-            <th>Actions</th>
+             <th>auther</th>
+             <th>Post</th>
+             <th>comment</th>
+             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -55,6 +56,7 @@ function CommentManage() {
             <tr key={comment._id}>
     
               <td>{comment.user_id?.username}</td>
+              <td>{comment.post_id?.title}</td>
               <td>{comment.text}</td>
               <td>
             

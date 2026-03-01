@@ -24,13 +24,10 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* Left side: Logo */}
       <div className="nav-left">
         <img src="/logo192.png" alt="App Logo" className="nav-logo" />
         <h2 className="nav-title">Idea Hub</h2>
       </div>
-
-      {/* Right side: User info or login/register */}
       <div className="nav-right">
         {user ? (
           <div className="user-section" ref={dropdownRef}>
@@ -47,8 +44,7 @@ function Navbar() {
               <span className="username">{user.username}</span>
               <span className={`arrow ${open ? "open" : ""}`}>&#9662;</span>
             </div>
-
-            {/* Dropdown content */}
+            
             {open && (
               <div className="dropdown">
                 <div className="dropdown-profile">

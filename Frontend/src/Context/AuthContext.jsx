@@ -10,8 +10,7 @@ export const AuthProvider = ({ children }) => {
 useEffect(() => {
   if (!token) return;
   const decoded = jwtDecode(token);
-  setUser(decoded); // instantly get role/id from token
-  // still fetch full profile after that
+  setUser(decoded); 
   axios.get("http://localhost:5000/users/profile", {
     headers: { Authorization: `Bearer ${token}` },
   })

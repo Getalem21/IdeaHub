@@ -3,6 +3,7 @@ import multer from "multer";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import Post from "../models/Post.js";
 import { authenticateToken } from "../middleware/auth.js";
 
 const JWT_SECRET = "your_super_secret_key";
@@ -14,7 +15,6 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
 const upload = multer({ storage });
-
 /* ----------------------------- Signup ----------------------------- */
 router.post("/signup", upload.single("photo"), async (req, res) => {
 
@@ -26,9 +26,7 @@ router.post("/signup", upload.single("photo"), async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: "Email already registered" });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new User({
       username,
       email,
@@ -50,7 +48,7 @@ router.post("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email,isActive:'true'});
     if (!user) return res.status(400).json({ message: "Invalid email or password" });
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -75,12 +73,27 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-/* ----------------------------- Profile ----------------------------- */
+/* -----------------------------personal Profile ----------------------------- */
 router.get("/profile", authenticateToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
+  } catch (err) {
+    console.error("Profile fetch error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+/* -----------------------------others Profile ----------------------------- */
+router.get("/profile/:id", async (req, res) => {
+  const userId = req.params.id; 
+  try {
+    const user = await User.findById(userId).select("-password")  ;
+    const posts = await Post.find({ user_id: userId });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({ user, posts });
   } catch (err) {
     console.error("Profile fetch error:", err);
     res.status(500).json({ message: "Server error" });

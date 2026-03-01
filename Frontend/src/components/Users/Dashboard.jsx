@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import Navbar from "../common/Navbar";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import Profile from "./Profile";
 
 function Dashboard() {
   const [posts, setPosts] = useState([]);
@@ -90,14 +91,16 @@ function Dashboard() {
                 )}
 
                 <p className="post-author">
-                  Posted by: {post.user_id?.username}
                   {post.user_id?.photo && (
                     <img
                       src={`http://localhost:5000/uploads/${post.user_id.photo}`}
                       alt={post.user_id.username}
-                      className="author-photo"
+                     className="auther-photo"
+
                     />
                   )}
+                  Posted by: {post.user_id?.username}
+
                 </p>
 
                 {/* Comment input */}
@@ -122,21 +125,31 @@ function Dashboard() {
 
                 {/* Display comments */}
                 <div className="comments-section">
-                  {post.comments.map((c) => (
-                    <div key={c._id} className="comment-item">
-                      {c.user_id?.photo && (
-                        <img
+              {post.comments.map((c) => (
+                c.user_id ? (
+                    <Link to={`/profile/${c.user_id._id}`} key={c._id}>
+                          <div className="comment-item">
+                                {c.user_id.photo && (
+                            <img
                           src={`http://localhost:5000/uploads/${c.user_id.photo}`}
-                          alt={c.user_id?.username}
-                          className="commenter-photo"
-                        />
-                      )}
-                      <p>
-                        <strong>{c.user_id?.username}</strong>: {c.text}
-                      </p>
-                    </div>
-                  ))}
+                               alt={c.user_id.username}
+                                 className="commenter-photo"
+                                 />
+        )}
+        <p>
+          <strong>{c.user_id.username}</strong>: {c.text}
+        </p>
+      </div>
+    </Link>
+  ) : (
+    <div key={c._id} className="comment-item">
+      <p><strong>Unknown User</strong>: {c.text}</p>
+    </div>
+  )
+))}
+
                 </div>
+                <Profile/>
               </div>
             ))}
           </div>

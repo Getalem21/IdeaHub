@@ -1,8 +1,4 @@
-import mongoose from 'mongoose';
-import User from '../models/User.js'; 
-import Post from '../models/Post.js'; 
-import commentSchema from '../models/Post.js';
-
+import mongoose from 'mongoose'
 mongoose.connect('mongodb://localhost:27017/ideaHub', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
