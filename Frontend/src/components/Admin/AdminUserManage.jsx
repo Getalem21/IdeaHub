@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
-import AdminPostManage from "./AdminPostManage"; 
+import AdminPostManage from "./AdminPostManage";
 import "./AdminUserManage.css";
 import CommentManage from "./CommentManage";
 
@@ -9,8 +9,8 @@ function AdminPage() {
   const { token } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
 
-  // 1️⃣ define fetchUsers first
-  const fetchUsers = async () => {
+  // ✅ memoized fetchUsers
+  const fetchUsers = useCallback(async () => {
     try {
       const res = await axios.get("http://localhost:5000/admin/users", {
         headers: { Authorization: `Bearer ${token}` },
@@ -19,12 +19,14 @@ function AdminPage() {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [token]); // depends only on token
 
-  // 2️⃣ useEffect only depends on token
+  // ✅ now safe
   useEffect(() => {
-    if (token) fetchUsers();
-  }, [token]);
+    if (token) {
+      fetchUsers();
+    }
+  }, [fetchUsers]);
 
   const updateUser = async (id, changes) => {
     try {

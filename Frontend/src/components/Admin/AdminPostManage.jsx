@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -6,12 +6,13 @@ function AdminPostManage() {
   const { token, user } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
 
-  // fetchPosts defined first
-  const fetchPosts = async () => {
+  // ✅ memoized fetchPosts
+  const fetchPosts = useCallback(async () => {
     if (!user || user.role !== "admin") {
       console.error("Access denied. Admins only.");
       return;
     }
+
     try {
       const res = await axios.get("http://localhost:5000/admin/posts", {
         headers: { Authorization: `Bearer ${token}` },
@@ -20,12 +21,14 @@ function AdminPostManage() {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [user, token]); // depends on user & token
 
-  // useEffect calls fetchPosts
+  // ✅ safe useEffect
   useEffect(() => {
-    if (user && token) fetchPosts();
-  }, [user, token]); // ✅ fetchPosts doesn't need to be added because it won't change
+    if (user && token) {
+      fetchPosts();
+    }
+  }, [fetchPosts]);
 
   const approvePost = async (id) => {
     try {
@@ -42,6 +45,7 @@ function AdminPostManage() {
 
   const deletePost = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
+
     try {
       await axios.delete(`http://localhost:5000/admin/posts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },

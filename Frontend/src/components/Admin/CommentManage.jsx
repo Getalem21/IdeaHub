@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -6,12 +6,13 @@ function CommentManage() {
   const { token, user } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
 
-  // 1️⃣ define fetchComments first
-  const fetchComments = async () => {
+  // ✅ memoized fetchComments
+  const fetchComments = useCallback(async () => {
     if (!user || user.role !== "admin") {
       console.error("Access denied. Admins only.");
       return;
     }
+
     try {
       const res = await axios.get("http://localhost:5000/admin/comments", {
         headers: { Authorization: `Bearer ${token}` },
@@ -20,19 +21,23 @@ function CommentManage() {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [user, token]); // depends on user & token
 
-  // 2️⃣ useEffect depends on user and token
+  // ✅ safe dependency
   useEffect(() => {
-    if (user && token) fetchComments();
-  }, [user, token]);
+    if (user && token) {
+      fetchComments();
+    }
+  }, [fetchComments]);
 
   const deleteComment = async (id) => {
     if (!window.confirm("Are you sure you want to delete this comment?")) return;
+
     try {
       await axios.delete(`http://localhost:5000/admin/comments/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
       fetchComments();
     } catch (err) {
       console.error(err);
