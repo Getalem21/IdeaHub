@@ -3,17 +3,15 @@ import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 
 function CommentManage() {
-  const { token , user} = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
-useEffect(() => {
-  if (user && token) fetchComments();
-}, [user, token]);
 
+  // 1️⃣ define fetchComments first
   const fetchComments = async () => {
     if (!user || user.role !== "admin") {
       console.error("Access denied. Admins only.");
       return;
-    } 
+    }
     try {
       const res = await axios.get("http://localhost:5000/admin/comments", {
         headers: { Authorization: `Bearer ${token}` },
@@ -24,10 +22,13 @@ useEffect(() => {
     }
   };
 
+  // 2️⃣ useEffect depends on user and token
+  useEffect(() => {
+    if (user && token) fetchComments();
+  }, [user, token]);
 
-  // Reject / Delete a post
-  const deleteComments = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this post?")) return;
+  const deleteComment = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this comment?")) return;
     try {
       await axios.delete(`http://localhost:5000/admin/comments/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -44,22 +45,23 @@ useEffect(() => {
       <table border="1" cellPadding="10" cellSpacing="0">
         <thead>
           <tr>
-             <th>auther</th>
-             <th>Post</th>
-             <th>comment</th>
-             <th>Actions</th>
+            <th>Author</th>
+            <th>Post</th>
+            <th>Comment</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {comments.map((comment) => (
             <tr key={comment._id}>
-    
               <td>{comment.user_id?.username}</td>
               <td>{comment.post_id?.title}</td>
               <td>{comment.text}</td>
               <td>
-            
-                <button onClick={() => deleteComments(comment._id)} style={{ color: "red" }}>
+                <button
+                  onClick={() => deleteComment(comment._id)}
+                  style={{ color: "red" }}
+                >
                   Delete
                 </button>
               </td>

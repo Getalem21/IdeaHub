@@ -3,18 +3,15 @@ import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 
 function AdminPostManage() {
-  const { token , user} = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
-  
-useEffect(() => {
-  if (user && token) fetchPosts();
-}, [user, token]);
 
+  // fetchPosts defined first
   const fetchPosts = async () => {
     if (!user || user.role !== "admin") {
       console.error("Access denied. Admins only.");
       return;
-    } 
+    }
     try {
       const res = await axios.get("http://localhost:5000/admin/posts", {
         headers: { Authorization: `Bearer ${token}` },
@@ -25,19 +22,24 @@ useEffect(() => {
     }
   };
 
-  // Approve a post
+  // useEffect calls fetchPosts
+  useEffect(() => {
+    if (user && token) fetchPosts();
+  }, [user, token]); // ✅ fetchPosts doesn't need to be added because it won't change
+
   const approvePost = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/admin/posts/${id}/approve`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put(
+        `http://localhost:5000/admin/posts/${id}/approve`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       fetchPosts();
     } catch (err) {
       console.error(err);
     }
   };
 
-  // Reject / Delete a post
   const deletePost = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
     try {
@@ -72,11 +74,17 @@ useEffect(() => {
               <td>{post.status}</td>
               <td>
                 {post.status === "pending" && (
-                  <button onClick={() => approvePost(post._id)} style={{ marginRight: 5 }}>
+                  <button
+                    onClick={() => approvePost(post._id)}
+                    style={{ marginRight: 5 }}
+                  >
                     Approve
                   </button>
                 )}
-                <button onClick={() => deletePost(post._id)} style={{ color: "red" }}>
+                <button
+                  onClick={() => deletePost(post._id)}
+                  style={{ color: "red" }}
+                >
                   Delete
                 </button>
               </td>

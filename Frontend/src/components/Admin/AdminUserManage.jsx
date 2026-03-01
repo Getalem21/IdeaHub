@@ -9,10 +9,7 @@ function AdminPage() {
   const { token } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-  if (users && token) fetchUsers();
-}, [users, token]);
-
+  // 1️⃣ define fetchUsers first
   const fetchUsers = async () => {
     try {
       const res = await axios.get("http://localhost:5000/admin/users", {
@@ -23,6 +20,11 @@ function AdminPage() {
       console.error(err);
     }
   };
+
+  // 2️⃣ useEffect only depends on token
+  useEffect(() => {
+    if (token) fetchUsers();
+  }, [token]);
 
   const updateUser = async (id, changes) => {
     try {
@@ -97,8 +99,9 @@ function AdminPage() {
           ))}
         </tbody>
       </table>
-      <AdminPostManage/>
-      <CommentManage/>
+
+      <AdminPostManage />
+      <CommentManage />
     </div>
   );
 }
