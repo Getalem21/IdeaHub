@@ -19,7 +19,7 @@ const SignIn = () => {
     try {
       const res = await axios.post("http://localhost:5000/users/signin", form);
       login(res.data.user, res.data.token);
-      if(res.data.user.role=='admin'){
+      if(res.data.user.role === 'admin'){
         navigate('/AdminUserManage');
         return;
       }

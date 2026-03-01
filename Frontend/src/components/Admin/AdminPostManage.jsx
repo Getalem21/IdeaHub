@@ -5,10 +5,10 @@ import { AuthContext } from "../../Context/AuthContext";
 function AdminPostManage() {
   const { token , user} = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  
+useEffect(() => {
+  if (user && token) fetchPosts();
+}, [user, token]);
 
   const fetchPosts = async () => {
     if (!user || user.role !== "admin") {

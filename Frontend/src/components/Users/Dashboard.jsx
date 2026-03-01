@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./Dashboard.css";
-import Navbar from "../common/Navbar";
+//import Navbar from "../common/Navbar";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
@@ -9,7 +9,7 @@ import Profile from "./Profile";
 function Dashboard() {
   const [posts, setPosts] = useState([]);
   const [comment, setComment] = useState({});
-  const { user, token } = useContext(AuthContext);
+  const { user} = useContext(AuthContext);
   const navigate = useNavigate();
 
   // Fetch posts with comments

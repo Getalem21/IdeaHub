@@ -10,8 +10,8 @@ function AdminPage() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+  if (users && token) fetchUsers();
+}, [users, token]);
 
   const fetchUsers = async () => {
     try {

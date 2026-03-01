@@ -5,7 +5,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import "./Signup.css";  
 
 const SignUp = () => {
-  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [form, setForm] = useState({

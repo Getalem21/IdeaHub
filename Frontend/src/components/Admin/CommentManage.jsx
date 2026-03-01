@@ -5,10 +5,9 @@ import { AuthContext } from "../../Context/AuthContext";
 function CommentManage() {
   const { token , user} = useContext(AuthContext);
   const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    fetchComments();
-  }, []);
+useEffect(() => {
+  if (user && token) fetchComments();
+}, [user, token]);
 
   const fetchComments = async () => {
     if (!user || user.role !== "admin") {
