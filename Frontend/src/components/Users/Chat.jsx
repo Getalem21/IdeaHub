@@ -17,7 +17,7 @@ function Chat() {
     if (!input.trim()) return;
     try {
       await axios.post(
-        `http://localhost:5000/chats/${id}`,
+        `/api/chats/${id}`,
         { message: input },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -37,7 +37,7 @@ function Chat() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/chats/${id}`, {
+        const res = await axios.get(`/api/chats/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const formattedMessages = res.data.map((msg) => ({
