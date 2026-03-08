@@ -38,7 +38,7 @@ const SignUp = () => {
       if (form.photo) formData.append("photo", form.photo);
   
 
-      await axios.post("http://localhost:5000/users/signup", formData, {
+      await axios.post("/api/users/signup", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

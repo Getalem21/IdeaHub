@@ -17,7 +17,7 @@ const SignIn = () => {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:5000/users/signin", form);
+      const res = await axios.post("/api/users/signin", form);
       login(res.data.user, res.data.token);
       if(res.data.user.role === 'admin'){
         navigate('/AdminUserManage');

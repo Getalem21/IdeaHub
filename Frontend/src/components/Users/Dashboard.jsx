@@ -15,7 +15,7 @@ function Dashboard() {
   // Fetch posts with comments
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/posts");
+      const res = await axios.get("api/posts");
       setPosts(res.data);
     } catch (err) {
       console.error("Error fetching posts:", err);
@@ -49,7 +49,7 @@ function Dashboard() {
 
     try {
       await axios.post(
-        `http://localhost:5000/posts/${postId}/comments`,
+        `api/posts/${postId}/comments`,
         { text },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -84,7 +84,7 @@ function Dashboard() {
 
                 {post.image && (
                   <img
-                    src={`http://localhost:5000/uploads/${post.image}`}
+                    src={`api/uploads/${post.image}`}
                     alt={post.title}
                     className="post-image"
                   />
@@ -93,7 +93,7 @@ function Dashboard() {
                 <p className="post-author">
                   {post.user_id?.photo && (
                     <img
-                      src={`http://localhost:5000/uploads/${post.user_id.photo}`}
+                      src={`api/uploads/${post.user_id.photo}`}
                       alt={post.user_id.username}
                      className="auther-photo"
 
@@ -131,7 +131,7 @@ function Dashboard() {
                           <div className="comment-item">
                                 {c.user_id.photo && (
                             <img
-                          src={`http://localhost:5000/uploads/${c.user_id.photo}`}
+                          src={`api/uploads/${c.user_id.photo}`}
                                alt={c.user_id.username}
                                  className="commenter-photo"
                                  />
